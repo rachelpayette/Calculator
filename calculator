@@ -1,0 +1,71 @@
+class Calculator {
+  constructor() {
+    this.currentValue = 0;
+    this.operator = null;
+  }
+
+  add(number) {
+    this.currentValue += number;
+  }
+
+  subtract(number) {
+    this.currentValue -= number;
+  }
+
+  multiply(number) {
+    this.currentValue *= number;
+  }
+
+  divide(number) {
+    if (number === 0) {
+      throw new Error("Cannot divide by zero");
+    }
+    this.currentValue /= number;
+  }
+
+  clear() {
+    this.currentValue = 0;
+    this.operator = null;
+  }
+
+  equals() {
+    if (this.operator === "+") {
+      return this.currentValue + this.currentNumber;
+    } else if (this.operator === "-") {
+      return this.currentValue - this.currentNumber;
+    } else if (this.operator === "*") {
+      return this.currentValue * this.currentNumber;
+    } else if (this.operator === "/") {
+      return this.currentValue / this.currentNumber;
+    } else {
+      return this.currentValue;
+    }
+  }
+
+  setOperator(operator) {
+    if (this.operator !== null) {
+      this.equals();
+    }
+    this.operator = operator;
+    this.currentNumber = this.currentValue;
+    this.currentValue = 0;
+  }
+}
+
+const calculator = new Calculator();
+
+console.log(calculator.currentValue); // 0
+calculator.add(5);
+console.log(calculator.currentValue); // 5
+calculator.subtract(2);
+console.log(calculator.currentValue); // 3
+calculator.multiply(4);
+console.log(calculator.currentValue); // 12
+calculator.divide(3);
+console.log(calculator.currentValue); // 4
+calculator.clear();
+console.log(calculator.currentValue); // 0
+calculator.add(10);
+calculator.setOperator("-");
+calculator.add(5);
+console.log(calculator.equals()); // 5
